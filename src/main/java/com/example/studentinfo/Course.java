@@ -1,7 +1,7 @@
 package com.example.studentinfo;
 
 public class Course {
-    private int course_id;
+    private int course_id;git checkout main
     private String title;
     private String dept_name;
     private int credits;
