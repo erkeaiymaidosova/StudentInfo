@@ -18,9 +18,7 @@
             <children>
                 <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 20;" text="Dashboard" />
                 <VBox spacing="15.0" style="-fx-padding: 20;">
-                    <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left;" text="Main " />
-                    <Button fx:id="Menu" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left;" text="Menu" />
-                    <Button fx:id="Help" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left;" text="Help" />
+                    <Button fx:id="Instruction" onAction="#onInst" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left;" text="Instruction" />
                     <Button style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left;" />
                 </VBox>
             </children>
@@ -30,7 +28,7 @@
         <TabPane layoutX="200.0" layoutY="0.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 10;" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <!-- Вкладка Students -->
-                <Tab text="Students">
+                <Tab fx:id="Student" onSelectionChanged="#StudentSelection" text="Students">
                     <content>
                         <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #FFFFFF;">
                             <children>
@@ -65,10 +63,10 @@
                                 </VBox>
 
                                 <!-- Кнопки -->
-                                <HBox alignment="CENTER" spacing="15.0" style="-fx-padding: 10;">
-                                    <Button style="-fx-background-color: linear-gradient(to right, #567C8D, #C8D9E6); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Add" />
-                                    <Button style="-fx-background-color: linear-gradient(to right, #2F4156, #567C8D); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Update" />
-                                    <Button style="-fx-background-color: linear-gradient(to right, #F76A6A, #EF5050); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Delete" />
+                                <HBox fx:id="UpdateStudents" alignment="CENTER" spacing="15.0" style="-fx-padding: 10;">
+                                    <Button fx:id="AddStudents" onAction="#onAddStudents" style="-fx-background-color: linear-gradient(to right, #567C8D, #C8D9E6); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Add" />
+                                    <Button fx:id="UpdateStudents" onAction="#OnUpdate" style="-fx-background-color: linear-gradient(to right, #2F4156, #567C8D); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Update" />
+                                    <Button fx:id="DeleteStudents" onAction="#onDeeletStudents" style="-fx-background-color: linear-gradient(to right, #F76A6A, #EF5050); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Delete" />
                                 </HBox>
 
                                 <!-- Список студентов -->
@@ -82,7 +80,7 @@
                 </Tab>
 
                 <!-- Вкладка Courses -->
-                <Tab text="Courses">
+                <Tab fx:id="Course" onSelectionChanged="#CourseSelection" text="Courses">
                     <content>
                         <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #FFFFFF;">
                             <children>
@@ -118,9 +116,9 @@
 
                                 <!-- Кнопки -->
                                 <HBox alignment="CENTER" spacing="15.0" style="-fx-padding: 10;">
-                                    <Button style="-fx-background-color: linear-gradient(to right, #567C8D, #C8D9E6); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Add" />
-                                    <Button style="-fx-background-color: linear-gradient(to right, #2F4156, #567C8D); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Update" />
-                                    <Button style="-fx-background-color: linear-gradient(to right, #F76A6A, #EF5050); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Delete" />
+                                    <Button fx:id="AddCourse" onAction="#onAddCourses" style="-fx-background-color: linear-gradient(to right, #567C8D, #C8D9E6); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Add" />
+                                    <Button fx:id="UpdateCourse" onAction="#onUpdateCourses" style="-fx-background-color: linear-gradient(to right, #2F4156, #567C8D); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Update" />
+                                    <Button fx:id="DeleteCourses" onAction="#onDeleteCourses" style="-fx-background-color: linear-gradient(to right, #F76A6A, #EF5050); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Delete" />
                                 </HBox>
 
                                 <!-- Список курсов -->
@@ -134,7 +132,7 @@
                 </Tab>
 
                 <!-- Вкладка Takes -->
-                <Tab text="Takes">
+                <Tab fx:id="Takes" onSelectionChanged="#TakesSelection" text="Takes">
                     <content>
                         <VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #FFFFFF;">
                             <children>
@@ -162,8 +160,8 @@
                                 <VBox spacing="10.0" style="-fx-padding: 20;">
                                     <Label style="-fx-font-size: 16px; -fx-text-fill: #2F4156; -fx-font-weight: bold;" text="Enrollment Actions" />
                                     <HBox alignment="CENTER" spacing="15.0">
-                                        <Button style="-fx-background-color: linear-gradient(to right, #567C8D, #C8D9E6); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Enroll" />
-                                        <Button style="-fx-background-color: linear-gradient(to right, #F76A6A, #EF5050); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Remove Enrollment" />
+                                        <Button fx:id="Enroll" onAction="#onEnroll" style="-fx-background-color: linear-gradient(to right, #567C8D, #C8D9E6); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Enroll" />
+                                        <Button fx:id="Remove" onAction="#onRemove" style="-fx-background-color: linear-gradient(to right, #F76A6A, #EF5050); -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10; -fx-background-radius: 20;" text="Remove Enrollment" />
                                     </HBox>
                                 </VBox>
 
