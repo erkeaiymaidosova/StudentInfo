@@ -1,0 +1,146 @@
+Index: src/main/java/com/example/studentinfo/HelloApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.studentinfo;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Scene;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\n\r\npublic class HelloApplication extends Application {\r\n    @Override\r\n    public void start(Stage stage) throws IOException {\r\n        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(\"hello-view.fxml\"));\r\n        Scene scene = new Scene(fxmlLoader.load(), 320, 240);\r\n        stage.setTitle(\"Hello!\");\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        launch();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/studentinfo/HelloApplication.java b/src/main/java/com/example/studentinfo/HelloApplication.java
+--- a/src/main/java/com/example/studentinfo/HelloApplication.java	(revision 11e5664c8f584315cbd253d2eda346549128158a)
++++ b/src/main/java/com/example/studentinfo/HelloApplication.java	(date 1733130260303)
+@@ -11,7 +11,7 @@
+     @Override
+     public void start(Stage stage) throws IOException {
+         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
++        Scene scene = new Scene(fxmlLoader.load(), 700, 700);
+         stage.setTitle("Hello!");
+         stage.setScene(scene);
+         stage.show();
+Index: src/main/java/com/example/studentinfo/TakesData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.studentinfo;\r\n\r\nimport java.sql.*;\r\nimport java.util.ArrayList;\r\n\r\npublic class TakesData {\r\n    private Connection conn;\r\n\r\n    public TakesData() {\r\n        String url = \"jdbc:postgresql://localhost:5434/employee_db\";\r\n        String username = \"postgres\";\r\n        String password = \"silvi\";\r\n\r\n        try {\r\n            conn = DriverManager.getConnection(url, username, password);\r\n            System.out.println(\"Database is successfully connected...\");\r\n        } catch (SQLException e) {\r\n            System.out.println(e.toString());\r\n        }\r\n    }\r\n\r\n    public ArrayList<Takes> getAllTakes() {\r\n        ArrayList<Takes> takes = new ArrayList<Takes>();\r\n        try {\r\n            String sql = \"SELECT * FROM TAKES\";\r\n            PreparedStatement preparedStatement = this.conn.prepareStatement(sql);\r\n            ResultSet resultSet = preparedStatement.executeQuery();\r\n            while (resultSet.next()) {\r\n                int id = resultSet.getInt(\"Id\");\r\n                int courseId = resultSet.getInt(\"course_id\");\r\n                int secId = resultSet.getInt(\"sec_id\");\r\n                String semester = resultSet.getString(\"semester\");\r\n                int year = resultSet.getInt(\"year\");\r\n                String grade = resultSet.getString(\"grade\");\r\n                Takes take = new Takes(id, courseId, secId, semester, year, grade);\r\n                takes.add(take);\r\n\r\n            }\r\n        } catch (SQLException e) {\r\n            System.out.println(e.toString());\r\n        }\r\n        return takes;\r\n    }\r\n    public int insertTakes(int courseId, int secId, String semester, int year, String grade) {\r\n        int newId = 0;\r\n        try {\r\n            String sql = \"INSERT INTO takes(course_id, sec_id, semester, year, grade) VALUES (?, ?, ?, ?, ?)\";\r\n            PreparedStatement preparedStatement = this.conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);\r\n            preparedStatement.setInt(1, courseId);\r\n            preparedStatement.setInt(2, secId);\r\n            preparedStatement.setString(3, semester);\r\n            preparedStatement.setInt(4, year);\r\n            preparedStatement.setString(5, grade);\r\n            int affectedRows = preparedStatement.executeUpdate();\r\n\r\n            if (affectedRows == 0) {\r\n                throw new SQLException(\"Creating record failed, no rows affected.\");\r\n            }\r\n\r\n            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {\r\n                if (generatedKeys.next()) {\r\n                    newId = generatedKeys.getInt(1);\r\n                }\r\n            }\r\n        } catch (SQLException e) {\r\n            System.out.println(e.toString());\r\n        }\r\n        return newId;\r\n    }\r\n    public void updateTakes(int id, int courseId, int secId, String semester, int year, String grade) {\r\n        try {\r\n            String sql = \"UPDATE takes SET course_id = ?, sec_id = ?, semester = ?, year = ?, grade = ? WHERE id = ?\";\r\n            PreparedStatement preparedStatement = this.conn.prepareStatement(sql);\r\n            preparedStatement.setInt(1, courseId);\r\n            preparedStatement.setInt(2, secId);\r\n            preparedStatement.setString(3, semester);\r\n            preparedStatement.setInt(4, year);\r\n            preparedStatement.setString(5, grade);\r\n            preparedStatement.setInt(6, id);\r\n\r\n            int affectedRows = preparedStatement.executeUpdate();\r\n\r\n            if (affectedRows == 0) {\r\n                throw new SQLException(\"Updating record failed, no rows affected.\");\r\n            }\r\n\r\n            System.out.println(\"Record updated successfully.\");\r\n        } catch (SQLException e) {\r\n            System.out.println(e.toString());\r\n        }\r\n    }\r\n    public void deleteTakes(int id) {\r\n        try {\r\n            String sql = \"DELETE FROM takes WHERE id = ?\";\r\n            PreparedStatement preparedStatement = this.conn.prepareStatement(sql);\r\n            preparedStatement.setInt(1, id);\r\n\r\n            int affectedRows = preparedStatement.executeUpdate();\r\n            System.out.println(\"Deleted rows: \" + affectedRows);\r\n        } catch (SQLException e) {\r\n            System.out.println(e.toString());\r\n        }\r\n    }\r\n\r\n\r\n}\r\n    \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/studentinfo/TakesData.java b/src/main/java/com/example/studentinfo/TakesData.java
+--- a/src/main/java/com/example/studentinfo/TakesData.java	(revision 11e5664c8f584315cbd253d2eda346549128158a)
++++ b/src/main/java/com/example/studentinfo/TakesData.java	(date 1733131239978)
+@@ -103,23 +103,4 @@
+     }
+ 
+ 
+-}
+-    
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
++}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"13c47973-107c-4176-a416-550778485aba\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"associatedIndex\": 2\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2pDRTG22oqj6m5VUgDvYEudgwhe\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/cholp/IdeaProjects/StudentInfo1\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"StudentInfo\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"StudentInfo\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"13c47973-107c-4176-a416-550778485aba\" name=\"Changes\" comment=\"\" />\r\n      <created>1732298666107</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1732298666107</updated>\r\n      <workItem from=\"1732298667379\" duration=\"968000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 11e5664c8f584315cbd253d2eda346549128158a)
++++ b/.idea/workspace.xml	(date 1733130712115)
+@@ -4,7 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="13c47973-107c-4176-a416-550778485aba" name="Changes" comment="" />
++    <list default="true" id="13c47973-107c-4176-a416-550778485aba" name="Changes" comment="">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/HelloApplication.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -13,9 +16,21 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="ProjectColorInfo"><![CDATA[{
+-  "associatedIndex": 2
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN",
++    "assignee": "mahominato"
++  }
++}]]></component>
++  <component name="GithubPullRequestsUISettings"><![CDATA[{
++  "selectedUrlAndAccountId": {
++    "url": "https://github.com/erkeaiymaidosova/StudentInfo.git",
++    "accountId": "742334de-3407-4d07-8507-0ec94a681db3"
++  }
+ }]]></component>
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 2
++}</component>
+   <component name="ProjectId" id="2pDRTG22oqj6m5VUgDvYEudgwhe" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+@@ -23,6 +38,7 @@
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
++    "Application.HelloApplication.executor": "Run",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "RunOnceActivity.git.unshallow": "true",
+     "git-widget-placeholder": "main",
+@@ -37,19 +53,6 @@
+     "vue.rearranger.settings.migration": "true"
+   }
+ }]]></component>
+-  <component name="RunManager">
+-    <configuration default="true" type="JetRunConfigurationType">
+-      <module name="StudentInfo" />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+-      <module name="StudentInfo" />
+-      <option name="filePath" />
+-      <method v="2" />
+-    </configuration>
+-  </component>
+   <component name="SharedIndexes">
+     <attachedChunks>
+       <set>
+@@ -73,4 +76,15 @@
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State />
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
+ </project>
+\ No newline at end of file

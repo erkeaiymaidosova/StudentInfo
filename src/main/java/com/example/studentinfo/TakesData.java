@@ -104,22 +104,3 @@ public class TakesData {
 
 
 }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
