@@ -92,7 +92,7 @@ public class CourseData {
             preparedStatement.setInt(1, course_id);
 
             int affectedRows = preparedStatement.executeUpdate();
-            System.out.println("Rows affected: " + affectedRows);
+            System.out.println("Deleted rows: " + affectedRows);
         } catch (SQLException e) {
             System.out.println("Error deleting course: " + e.getMessage());
         }
