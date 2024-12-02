@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F5EFEB;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #F5EFEB;" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <!-- Боковая панель -->
         <VBox prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #2F4156;">
@@ -25,7 +25,7 @@
         </VBox>
 
         <!-- Основной контент -->
-        <TabPane layoutX="200.0" layoutY="0.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 10;" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutX="148.0" prefHeight="600.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF; -fx-border-radius: 10;" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <!-- Вкладка Students -->
                 <Tab fx:id="Student" onSelectionChanged="#StudentSelection" text="Students">
