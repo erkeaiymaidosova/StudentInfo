@@ -28,9 +28,9 @@ public class StudentData {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("Id");
-                String name = resultSet.getString("studentName");
-                String dept_name = resultSet.getString("departmentName");
-                int tot_cred = resultSet.getInt("totalCredit");
+                String name = resultSet.getString("name");
+                String dept_name = resultSet.getString("dept_name");
+                int tot_cred = resultSet.getInt("tot_cred");
                 Student student = new Student(id, name, dept_name, tot_cred);
                 students.add(student);
             }
@@ -73,8 +73,11 @@ public class StudentData {
             preparedStatement.setInt(1,id);
 
             int affectedRows = preparedStatement.executeUpdate();
+            if( affectedRows == 0){
+                throw new SQLException("Deleting task failed.");
+            }
 
-            System.out.println("Affected rows: " + affectedRows);
+            System.out.println("Deleted rows: " + affectedRows);
         }catch (SQLException e){
             System.out.println(e.toString());
         }
@@ -92,7 +95,7 @@ public class StudentData {
             int affectedRows = preparedStatement.executeUpdate();
 
             if( affectedRows == 0){
-                throw new SQLException("Creating task failed.");
+                throw new SQLException("Updating task failed.");
             }
 
             System.out.println("Update is success.");
@@ -109,13 +112,14 @@ public class StudentData {
             PreparedStatement preparedStatement=this.conn.prepareStatement(sql);
             preparedStatement.setInt(1,id);
             ResultSet resultSet=preparedStatement.executeQuery();
-            while(resultSet.next()){
-                id=resultSet.getInt("id");
-                String name=resultSet.getString("name");
-                String dept_name=resultSet.getString("dept_name");
-                int tot_cred=resultSet.getInt("tot_cred");
-                student =new Student(id,name,dept_name,tot_cred);
+            if (resultSet.next()) {
+                id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String dept_name = resultSet.getString("dept_name");
+                int tot_cred = resultSet.getInt("tot_cred");
+                student = new Student(id, name, dept_name, tot_cred);
             }
+
         }catch (SQLException e){
             System.out.println(e.toString());
         }
