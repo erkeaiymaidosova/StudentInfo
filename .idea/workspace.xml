@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53be09e4-94c3-42da-94e5-1368eafb179a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/584425e0-cd39-4daa-80d8-1b64f7ed0350.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/584425e0-cd39-4daa-80d8-1b64f7ed0350/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/584425e0-cd39-4daa-80d8-1b64f7ed0350/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/584425e0-cd39-4daa-80d8-1b64f7ed0350/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/584425e0-cd39-4daa-80d8-1b64f7ed0350/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9977eb9-0e05-45b1-90d9-ed0c7ad12ca1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a9977eb9-0e05-45b1-90d9-ed0c7ad12ca1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/CourseData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/CourseData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/StudentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/StudentData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/TakesData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/TakesData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +66,9 @@
       <workItem from="1731986149978" duration="158000" />
       <workItem from="1731988853699" duration="2563000" />
       <workItem from="1732261207226" duration="1889000" />
-      <workItem from="1732263275041" duration="298000" />
+      <workItem from="1732263275041" duration="507000" />
+      <workItem from="1732983719278" duration="426000" />
+      <workItem from="1733125846001" duration="909000" />
     </task>
     <servers />
   </component>
