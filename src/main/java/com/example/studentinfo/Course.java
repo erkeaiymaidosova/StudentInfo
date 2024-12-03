@@ -1,7 +1,7 @@
 package com.example.studentinfo;
 
 public class Course {
-    private int course_id;
+    private String course_id;
     private String title;
     private String dept_name;
     private int credits;
@@ -16,11 +16,11 @@ public class Course {
                 '}';
     }
 
-    public int getCourse_id() {
+    public String getCourse_id() {
         return course_id;
     }
 
-    public void setCourse_id(int course_id) {
+    public void setCourse_id(String course_id) {
         this.course_id = course_id;
     }
 
@@ -50,7 +50,7 @@ public class Course {
 
 
 
-    public Course(int course_id, String title, String dept_name, int credits) {
+    public Course(String course_id, String title, String dept_name, int credits) {
         this.course_id = course_id;
         this.title = title;
         this.dept_name = dept_name;

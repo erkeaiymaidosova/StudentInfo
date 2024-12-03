@@ -5,12 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1172e970-41d0-4e3c-a8ff-eae8ef2c6e76" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/95815191-bef5-4154-aa6b-374bf7b7fa25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/95815191-bef5-4154-aa6b-374bf7b7fa25/storage_v2/_src_/database/university.jupICw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/95815191-bef5-4154-aa6b-374bf7b7fa25/storage_v2/_src_/database/university.jupICw/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/95815191-bef5-4154-aa6b-374bf7b7fa25/storage_v2/_src_/database/university.jupICw/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/95815191-bef5-4154-aa6b-374bf7b7fa25/storage_v2/_src_/database/university.jupICw/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9977eb9-0e05-45b1-90d9-ed0c7ad12ca1/storage_v2/_src_/database/university.jupICw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9977eb9-0e05-45b1-90d9-ed0c7ad12ca1/storage_v2/_src_/database/university.jupICw/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9977eb9-0e05-45b1-90d9-ed0c7ad12ca1/storage_v2/_src_/database/university.jupICw/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9977eb9-0e05-45b1-90d9-ed0c7ad12ca1/storage_v2/_src_/database/university.jupICw/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9977eb9-0e05-45b1-90d9-ed0c7ad12ca1/storage_v2/_src_/database/university.jupICw/schema/public.abK9xQ.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/Course.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/CourseData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/CourseData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/StudentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/StudentData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/Takes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/Takes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/TakesData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/TakesData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/studentinfo/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/studentinfo/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,6 +50,12 @@
     &quot;accountId&quot;: &quot;742334de-3407-4d07-8507-0ec94a681db3&quot;
   }
 }</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -38,8 +67,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.HelloApplication.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -72,11 +103,23 @@
       <option name="presentableId" value="Default" />
       <updated>1733133388015</updated>
       <workItem from="1733133389076" duration="209000" />
-      <workItem from="1733133606707" duration="19027000" />
+      <workItem from="1733133606707" duration="14124000" />
+      <workItem from="1733195372461" duration="11178000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/studentinfo/HelloController.java</url>
+          <line>377</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
