@@ -19,7 +19,7 @@ public class HelloController {
     @FXML
     private ListView<String> courseListView;
     @FXML
-    private TextField enrollStudentIDField, enrollCourseIDField;
+    private TextField enrollStudentIDField, enrollCourseIDField,semesterField, yearField, sectionIDField, gradeField;
     @FXML
     private ListView<String> enrollmentListView;
     private Connection conn;
@@ -30,7 +30,15 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to the Student Info Management System!");
     }
-
+    public HelloController() {
+        try {
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/university", "postgres", "132569313");
+            System.out.println("Database connection established.");
+        } catch (SQLException e) {
+            System.err.println("Failed to connect to the database: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     @FXML
     protected void onAddStudent(ActionEvent event) {
         String selectedStudent = studentListView.getSelectionModel().getSelectedItem();
@@ -228,50 +236,67 @@ public class HelloController {
 
     }
 
-
     @FXML
     protected void onUpdateCourse(ActionEvent event) {
-        String selectedCourse = courseListView.getSelectionModel().getSelectedItem();
-        if (selectedCourse == null) {
-            showAlert("Error", "Please select a course to update.");
+        if (conn == null) {
+            showAlert("Error", "Database connection is not initialized.");
             return;
         }
 
-        if (areFieldsEmpty(titleField, courseDepartmentField, creditsField)) {
-            showAlert("Error", "All fields are required to update a course.");
-            return;
-        }
-
-        String title = titleField.getText();
-        String dept_name = courseDepartmentField.getText();
-        int credits = Integer.parseInt(creditsField.getText());
         String course_id = courseIDField.getText();
-        TakesData takesData = new TakesData();
-        try {
-            String query = "UPDATE course SET title = ?, dept_name = ?, credits = ? WHERE course_id = ?";
-            PreparedStatement preparedStatement = takesData.getConn().prepareStatement(query);
-            preparedStatement.setString(1, title);
-            preparedStatement.setString(2, dept_name);
-            preparedStatement.setInt(3, credits);
-            preparedStatement.setString(4, course_id);
+        String title = titleField.getText();
+        String department = courseDepartmentField.getText();
+        String creditsText = creditsField.getText();
 
-            int affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Updating course failed, no rows affected.");
-            }else{
-                showAlert1("Success", "Updated successfully.");
+        if (course_id == null || course_id.isEmpty()) {
+            showAlert("Error", "Please input a course ID to update.");
+            return;
+        }
+
+        if (title == null || title.isEmpty() || department == null || department.isEmpty() || creditsText == null || creditsText.isEmpty()) {
+            showAlert("Error", "All fields (Title, Department, and Credits) must be filled.");
+            return;
+        }
+
+        int credits;
+        try {
+            credits = Integer.parseInt(creditsText);
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Credits must be a numeric value.");
+            return;
+        }
+        TakesData takesData=new TakesData();
+        try {
+            String checkQuery = "SELECT course_id FROM course WHERE course_id = ?";
+            PreparedStatement checkStmt = takesData.getConn().prepareStatement(checkQuery);
+            checkStmt.setString(1, course_id);
+            ResultSet resultSet = checkStmt.executeQuery();
+
+            if (!resultSet.next()) {
+                showAlert("Error", "Course not found in the database. Course ID: " + course_id);
+                return;
             }
 
-            Course updatedCourse = new Course(course_id, title, dept_name, credits);
-            courseListView.getItems().set(courseListView.getSelectionModel().getSelectedIndex(), formatCourseInfo(updatedCourse));
+            String updateQuery = "UPDATE course SET title = ?, dept_name = ?, credits = ? WHERE course_id = ?";
+            PreparedStatement updateStatement =takesData.getConn().prepareStatement(updateQuery);
+            updateStatement.setString(1, title);
+            updateStatement.setString(2, department);
+            updateStatement.setInt(3, credits);
+            updateStatement.setString(4, course_id);
 
-            clearFields(titleField, courseDepartmentField, creditsField);
+            int affectedRows = updateStatement.executeUpdate();
+            if (affectedRows == 0) {
+                showAlert("Error", "Updating course failed. No rows affected.");
+            } else {
+                showAlert1("Success", "Course updated successfully.");
+                clearFields(courseIDField, titleField, courseDepartmentField, creditsField);
+            }
 
         } catch (SQLException e) {
             showAlert("Database Error", "An error occurred while updating the course: " + e.getMessage());
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            showAlert("Invalid Input", "Please enter valid data for the credits and course ID fields.");
+        } catch (Exception e) {
+            showAlert("Unexpected Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -280,59 +305,70 @@ public class HelloController {
 
     @FXML
     protected void onDeleteCourse(ActionEvent event) {
-        String selectedCourse = courseListView.getSelectionModel().getSelectedItem();
-        if (selectedCourse == null) {
-            showAlert("Error", "Please select a course to delete.");
+        String course_id = courseIDField.getText();
+        if (course_id == null || course_id.isEmpty()) {
+            showAlert("Error", "Please input a course ID to delete.");
             return;
         }
 
-        String course_id = selectedCourse.split(" ")[0].trim();  // Trim any leading/trailing spaces
         TakesData takesData = new TakesData();
         if (takesData.getConn() == null) {
             showAlert("Error", "Database connection failed.");
             return;
         }
+
         try {
             String checkQuery = "SELECT course_id FROM course WHERE course_id = ?";
             PreparedStatement checkStatement = takesData.getConn().prepareStatement(checkQuery);
             checkStatement.setString(1, course_id);
             ResultSet resultSet = checkStatement.executeQuery();
+
             if (!resultSet.next()) {
-                showAlert("Error", "Course not found.");
+                showAlert("Error", "Course not found in the database. Course ID: " + course_id);
                 return;
             }
 
-            String query = "DELETE FROM course WHERE course_id = ?";
-            PreparedStatement preparedStatement = takesData.getConn().prepareStatement(query);
-            preparedStatement.setString(1, course_id);
+            String deleteQuery = "DELETE FROM course WHERE course_id = ?";
+            PreparedStatement deleteStatement = takesData.getConn().prepareStatement(deleteQuery);
+            deleteStatement.setString(1, course_id);
 
-            int affectedRows = preparedStatement.executeUpdate();
+            int affectedRows = deleteStatement.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("Deleting course failed, no rows affected.");
+                showAlert("Error", "Deleting course failed. No rows affected.");
             } else {
-                showAlert1("Success", "Deleted successfully.");
+                showAlert1("Success", "Course deleted successfully.");
+                clearFields(courseIDField, titleField, courseDepartmentField, creditsField);
             }
-
-            courseListView.getItems().remove(courseListView.getSelectionModel().getSelectedIndex());
-            clearFields(courseIDField);
 
         } catch (SQLException e) {
             showAlert("Database Error", "An error occurred while deleting the course: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            showAlert("Unexpected Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
 
 
+
+
+
+
+
     @FXML
     protected void onEnrollStudent(ActionEvent event) {
-        if (areFieldsEmpty(enrollStudentIDField, enrollCourseIDField)) {
-            showAlert("Error", "Both Student ID and Course ID are required to enroll a student.");
+        if (areFieldsEmpty(enrollStudentIDField, enrollCourseIDField, semesterField, yearField, sectionIDField, gradeField)) {
+            showAlert("Error", "All fields are required to enroll a student.");
             return;
         }
 
         String studentId = enrollStudentIDField.getText();
         String courseId = enrollCourseIDField.getText();
+        String semester = semesterField.getText();
+        String sectionId = sectionIDField.getText();
+        String grade = gradeField.getText();
+        int year;
 
         if (!studentId.matches("\\d+")) {
             showAlert("Invalid Input", "Student ID must be a numeric value.");
@@ -343,10 +379,12 @@ public class HelloController {
             return;
         }
 
-        String semester = "Fall";
-        int year = 2010;
-        String secId = "1";
-        String grade = "A";
+        try {
+            year = Integer.parseInt(yearField.getText());
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Input", "Year must be a valid number.");
+            return;
+        }
 
         TakesData takesData = new TakesData();
         try {
@@ -364,7 +402,7 @@ public class HelloController {
             PreparedStatement insertStmt = takesData.getConn().prepareStatement(insertQuery);
             insertStmt.setString(1, studentId);
             insertStmt.setString(2, courseId);
-            insertStmt.setString(3, secId);
+            insertStmt.setString(3, sectionId);
             insertStmt.setString(4, semester);
             insertStmt.setInt(5, year);
             insertStmt.setString(6, grade);
@@ -378,46 +416,38 @@ public class HelloController {
             return;
         }
 
-        Takes takes = new Takes(studentId,courseId,secId, semester,year,grade);
+        Takes takes = new Takes(studentId, courseId, sectionId, semester, year, grade);
         enrollmentListView.getItems().add(String.valueOf(takes));
-        clearFields(enrollStudentIDField, enrollCourseIDField);
+        clearFields(enrollStudentIDField, enrollCourseIDField, semesterField, yearField, sectionIDField, gradeField);
         showAlert1("Success", "Student enrolled successfully.");
     }
 
-
-
-
     @FXML
     protected void onRemoveEnroll(ActionEvent event) {
-        String selectedStudent = enrollStudentIDField.getText();
-        String selectedCourse = enrollCourseIDField.getText();
-
-        if (selectedStudent.isEmpty() || selectedCourse.isEmpty()) {
-            showAlert("Error", "Please provide both Student ID and Course ID.");
+        if (areFieldsEmpty(enrollStudentIDField, enrollCourseIDField)) {
+            showAlert("Error", "Student ID and Course ID are required to remove enrollment.");
             return;
         }
+
+        String studentId = enrollStudentIDField.getText();
+        String courseId = enrollCourseIDField.getText();
+
         TakesData takesData = new TakesData();
+        try {
+            String deleteQuery = "DELETE FROM takes WHERE id = ? AND course_id = ?";
+            PreparedStatement deleteStmt = takesData.getConn().prepareStatement(deleteQuery);
+            deleteStmt.setString(1, studentId);
+            deleteStmt.setString(2, courseId);
 
-        String studentId = selectedStudent;
-        String courseId = selectedCourse;
-
-        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5434/employee_db", "postgres", "silvi")) {
-            String sql = "DELETE FROM takes WHERE id = ? AND course_id = ?";
-            PreparedStatement preparedStatement = takesData.getConn().prepareStatement(sql);
-
-            preparedStatement.setString(1, studentId);
-            preparedStatement.setString(2, courseId);
-
-            int affectedRows = preparedStatement.executeUpdate();
-
+            int affectedRows = deleteStmt.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("Removing enrollment failed, no rows affected.");
+                showAlert("Error", "Failed to remove enrollment.");
+                return;
             }
 
             showAlert1("Success", "Enrollment removed successfully.");
             enrollmentListView.getItems().remove(enrollmentListView.getSelectionModel().getSelectedIndex());
-            clearFields(studentIDField, courseIDField);
-
+            clearFields(enrollStudentIDField, enrollCourseIDField);
         } catch (SQLException e) {
             showAlert("Database Error", "An error occurred while removing the enrollment: " + e.getMessage());
             e.printStackTrace();
