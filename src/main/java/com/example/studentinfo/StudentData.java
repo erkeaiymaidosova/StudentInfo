@@ -27,7 +27,7 @@ public class StudentData {
             PreparedStatement preparedStatement = this.conn.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("Id");
+                int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String dept_name = resultSet.getString("dept_name");
                 int tot_cred = resultSet.getInt("tot_cred");
