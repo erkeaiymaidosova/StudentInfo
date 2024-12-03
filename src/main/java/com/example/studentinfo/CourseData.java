@@ -26,7 +26,7 @@ public class CourseData {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                int course_id = resultSet.getInt("course_id");
+                String course_id = resultSet.getString("course_id");
                 String title = resultSet.getString("title");
                 String dept_name = resultSet.getString("dept_name");
                 int credits = resultSet.getInt("credits");
@@ -97,12 +97,12 @@ public class CourseData {
             System.out.println("Error deleting course: " + e.getMessage());
         }
     }
-    public Course getCourse(int course_id) {
+    public Course getCourse(String course_id) {
         Course course = null;
         try {
             String sql = "SELECT * FROM course WHERE course_id = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, course_id);
+            preparedStatement.setString(1, course_id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String title = resultSet.getString("title");
@@ -117,5 +117,6 @@ public class CourseData {
         }
         return course;
     }
+
 
 }

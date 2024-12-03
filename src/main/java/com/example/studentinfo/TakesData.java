@@ -7,7 +7,7 @@ public class TakesData {
     private Connection conn;
 
     public TakesData() {
-        String url = "jdbc:postgresql://localhost:5434/employee_db";
+        String url = "jdbc:postgresql://localhost:5434/university";
         String username = "postgres";
         String password = "silvi";
 
@@ -17,8 +17,12 @@ public class TakesData {
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
+
     }
 
+    public Connection getConn() {
+        return conn;
+    }
     public ArrayList<Takes> getAllTakes() {
         ArrayList<Takes> takes = new ArrayList<Takes>();
         try {
@@ -26,9 +30,9 @@ public class TakesData {
             PreparedStatement preparedStatement = this.conn.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("Id");
-                int courseId = resultSet.getInt("course_id");
-                int secId = resultSet.getInt("sec_id");
+                String id = resultSet.getString("Id");
+                String courseId = resultSet.getString("course_id");
+                String secId = resultSet.getString("sec_id");
                 String semester = resultSet.getString("semester");
                 int year = resultSet.getInt("year");
                 String grade = resultSet.getString("grade");
@@ -56,7 +60,11 @@ public class TakesData {
             if (affectedRows == 0) {
                 throw new SQLException("Creating record failed, no rows affected.");
             }
-
+            if (grade == null || grade.isEmpty()) {
+                preparedStatement.setNull(5, Types.VARCHAR);
+            } else {
+                preparedStatement.setString(5, grade);
+            }
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     newId = generatedKeys.getInt(1);

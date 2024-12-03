@@ -1,9 +1,9 @@
 package com.example.studentinfo;
 
 public class Takes {
-    private int id;
-    private int course_id;
-    private int sec_id;
+    private String id;
+    private String course_id;
+    private String sec_id;
     private String semester;
     private int year;
     private String grade;
@@ -20,27 +20,27 @@ public class Takes {
                 '}';
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getCourse_id() {
+    public String getCourse_id() {
         return course_id;
     }
 
-    public void setCourse_id(int course_id) {
+    public void setCourse_id(String course_id) {
         this.course_id = course_id;
     }
 
-    public int getSec_id() {
+    public String getSec_id() {
         return sec_id;
     }
 
-    public void setSec_id(int sec_id) {
+    public void setSec_id(String sec_id) {
         this.sec_id = sec_id;
     }
 
@@ -68,7 +68,7 @@ public class Takes {
         this.grade = grade;
     }
 
-    public Takes(int id, int course_id, int sec_id, String semester, int year, String grade) {
+    public Takes(String id, String course_id, String sec_id, String semester, int year, String grade) {
         this.id = id;
         this.course_id = course_id;
         this.sec_id = sec_id;
