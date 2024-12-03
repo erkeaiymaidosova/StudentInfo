@@ -113,10 +113,10 @@ public class HelloController {
             showAlert("Error", "All fields are required to update the student.");
             return;
         }
-
+        TakesData takesData=new TakesData();
         try {
             String query = "UPDATE student SET name = ?, dept_name = ?, tot_cred = ? WHERE id = ?";
-            try (PreparedStatement statement = conn.prepareStatement(query)) {
+            try (PreparedStatement statement = takesData.getConn().prepareStatement(query);) {
                 statement.setString(1, studentNameField.getText());
                 statement.setString(2, departmentField.getText());
                 statement.setInt(3, Integer.parseInt(totalCreditsField.getText()));
@@ -508,7 +508,7 @@ public class HelloController {
     public void StudentSelection(Event event) {
         String selectedStudent = studentListView.getSelectionModel().getSelectedItem();
         if (selectedStudent != null) {
-            showAlert("Student Selected", "You selected: " + selectedStudent);
+            showAlert1("Student Selected", "You selected: " + selectedStudent);
         }
     }
 
