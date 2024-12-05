@@ -1,6 +1,7 @@
 package com.example.studentinfo;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -32,7 +33,7 @@ public class HelloController {
     }
     public HelloController() {
         try {
-            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/university", "postgres", "132569313");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5434/university", "postgres", "silvi");
             System.out.println("Database connection established.");
         } catch (SQLException e) {
             System.err.println("Failed to connect to the database: " + e.getMessage());
@@ -76,6 +77,7 @@ public class HelloController {
                 throw new SQLException("Operation failed");
             }else{
                 showAlert1("Success", "Inserted successfully.");
+                refreshStudentList();
             }
 
             if (!isUpdating) {
@@ -109,22 +111,27 @@ public class HelloController {
             return;
         }
 
+
+        String studentID = selectedStudent.split(":")[0].trim();
+
         if (areFieldsEmpty(studentIDField, studentNameField, departmentField, totalCreditsField)) {
             showAlert("Error", "All fields are required to update the student.");
             return;
         }
-        TakesData takesData=new TakesData();
+
+        TakesData takesData = new TakesData();
+
         try {
             String query = "UPDATE student SET name = ?, dept_name = ?, tot_cred = ? WHERE id = ?";
-            try (PreparedStatement statement = takesData.getConn().prepareStatement(query);) {
+            try (PreparedStatement statement = takesData.getConn().prepareStatement(query)) {
                 statement.setString(1, studentNameField.getText());
                 statement.setString(2, departmentField.getText());
                 statement.setInt(3, Integer.parseInt(totalCreditsField.getText()));
-                statement.setString(4, studentIDField.getText());
+                statement.setString(4, studentID);  // Use the extracted studentID here
 
                 int rowsAffected = statement.executeUpdate();
                 if (rowsAffected > 0) {
-                    studentListView.getItems().set(studentListView.getSelectionModel().getSelectedIndex(), formatStudentInfo());
+                    refreshStudentList();
                     clearFields(studentIDField, studentNameField, departmentField, totalCreditsField);
                     showAlert1("Success", "Updated successfully.");
                 } else {
@@ -137,6 +144,37 @@ public class HelloController {
         }
     }
 
+        private void refreshStudentList() {
+            TakesData takesData = new TakesData();
+        ObservableList<String> studentList = FXCollections.observableArrayList();
+
+        try {
+            String query = "SELECT id, name, dept_name, tot_cred FROM student";
+            try (PreparedStatement statement = takesData.getConn().prepareStatement(query);
+                 ResultSet rs = statement.executeQuery()) {
+
+                while (rs.next()) {
+                    String id = rs.getString("id");
+                    String name = rs.getString("name");
+                    String deptName = rs.getString("dept_name");
+                    int totalCredits = rs.getInt("tot_cred");
+
+                    studentList.add(formatStudentInfo(id, name, deptName, totalCredits));
+                }
+
+                studentListView.setItems(studentList);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Database Error", "An error occurred while refreshing the student list: " + e.getMessage());
+        }
+    }
+
+    private String formatStudentInfo(String id, String name, String deptName, int totalCredits) {
+        return id + ": " + name + " | " + deptName + " | Credits: " + totalCredits;
+    }
+
+
     @FXML
     protected void onDeleteStudent(ActionEvent event) {
         String selectedStudent = studentListView.getSelectionModel().getSelectedItem();
@@ -145,7 +183,7 @@ public class HelloController {
             return;
         }
 
-        String studentID = selectedStudent.split(",")[0].split(":")[1].trim();  // Extract the ID from the formatted string
+        String studentID = selectedStudent.split(":")[0].trim();
         TakesData takesData=new TakesData();
         try {
             String query = "DELETE FROM student WHERE id = ?";
@@ -156,6 +194,7 @@ public class HelloController {
                 if (rowsAffected > 0) {
                     studentListView.getItems().remove(selectedStudent);
                     clearFields(studentIDField, studentNameField, departmentField, totalCreditsField);
+                    refreshStudentList();
                     showAlert1("Success", "Deleted successfully.");
                 } else {
                     showAlert("Error", "Failed to delete student.");
@@ -172,6 +211,33 @@ public class HelloController {
                 ", Department: " + course.getDept_name() +
                 ", Credits: " + course.getCredits();
     }
+
+    private void refreshCourseList() {
+        TakesData takesData = new TakesData();
+        ObservableList<String> courseList = FXCollections.observableArrayList();
+
+        try {
+            String query = "SELECT course_id, title, dept_name, credits FROM course";
+            PreparedStatement statement = takesData.getConn().prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                String courseId = rs.getString("course_id");
+                String title = rs.getString("title");
+                String deptName = rs.getString("dept_name");
+                int credits = rs.getInt("credits");
+
+                courseList.add(formatCourseInfo(new Course(courseId, title, deptName, credits)));
+            }
+
+            courseListView.setItems(courseList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Database Error", "An error occurred while refreshing the course list: " + e.getMessage());
+        }
+    }
+
 
 
     @FXML
@@ -223,6 +289,7 @@ public class HelloController {
                 throw new SQLException("Creating course failed, no rows affected.");
             }else{
                 showAlert1("Success", "Inserted successfully.");
+                refreshCourseList();
             }
         } catch (SQLException e) {
             showAlert("Database Error", "An error occurred while adding the course: " + e.getMessage());
@@ -289,16 +356,20 @@ public class HelloController {
                 showAlert("Error", "Updating course failed. No rows affected.");
             } else {
                 showAlert1("Success", "Course updated successfully.");
+                refreshCourseList();
                 clearFields(courseIDField, titleField, courseDepartmentField, creditsField);
             }
 
         } catch (SQLException e) {
             showAlert("Database Error", "An error occurred while updating the course: " + e.getMessage());
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
             e.printStackTrace();
         } catch (Exception e) {
             showAlert("Unexpected Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
         }
+
     }
 
 
@@ -337,12 +408,15 @@ public class HelloController {
                 showAlert("Error", "Deleting course failed. No rows affected.");
             } else {
                 showAlert1("Success", "Course deleted successfully.");
+                refreshCourseList();
                 clearFields(courseIDField, titleField, courseDepartmentField, creditsField);
             }
 
         } catch (SQLException e) {
             showAlert("Database Error", "An error occurred while deleting the course: " + e.getMessage());
             e.printStackTrace();
+            System.out.println("SQL State: " + e.getSQLState());
+            System.out.println("Error Code: " + e.getErrorCode());
         } catch (Exception e) {
             showAlert("Unexpected Error", "An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
@@ -456,6 +530,7 @@ public class HelloController {
 
 
 
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -502,7 +577,7 @@ public class HelloController {
     }
 
     public void onInst(ActionEvent actionEvent) {
-        showAlert1("Instruction", "Instructions on how to use the system: Add, Update, and Delete students, courses, and enrollments.");
+        showAlert1("Instruction", "Instructions on how to use the system: Add, Update, and Delete students, courses, and enrollments.Fill fields and click on add to add,select student and fill the field with new values and click update,select and fill the id field click delete");
     }
 
     public void StudentSelection(Event event) {

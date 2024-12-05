@@ -7,9 +7,9 @@ public class StudentData {
     private Connection conn;
 
     public StudentData(){
-        String url = "jdbc:postgresql://localhost:5432/university";
+        String url = "jdbc:postgresql://localhost:5434/university";
         String username = "postgres";
-        String password = "132569313";
+        String password = "silvi";
 
         try {
             conn = DriverManager.getConnection(url, username, password);
@@ -27,7 +27,7 @@ public class StudentData {
             PreparedStatement preparedStatement = this.conn.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                String id = resultSet.getString("id");
                 String name = resultSet.getString("name");
                 String dept_name = resultSet.getString("dept_name");
                 int tot_cred = resultSet.getInt("tot_cred");
@@ -105,15 +105,15 @@ public class StudentData {
             System.out.println(e.toString());
         }
     }
-    public Student getStudent(int id){
+    public Student getStudent(String id){
         Student student =null;
         try{
             String sql= "SELECT * FROM STUDENT WHERE id=?";
             PreparedStatement preparedStatement=this.conn.prepareStatement(sql);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setString(1,id);
             ResultSet resultSet=preparedStatement.executeQuery();
             if (resultSet.next()) {
-                id = resultSet.getInt("id");
+                id = resultSet.getString("id");
                 String name = resultSet.getString("name");
                 String dept_name = resultSet.getString("dept_name");
                 int tot_cred = resultSet.getInt("tot_cred");

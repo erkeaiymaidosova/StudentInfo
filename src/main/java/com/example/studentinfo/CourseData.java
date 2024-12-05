@@ -7,9 +7,9 @@ public class CourseData {
     private Connection conn;
 
     public CourseData() {
-        String url = "jdbc:postgresql://localhost:5432/university";
+        String url = "jdbc:postgresql://localhost:5434/university";
         String username = "postgres";
-        String password = "132569313";
+        String password = "silvi";
 
         try {
             conn = DriverManager.getConnection(url, username, password);

@@ -1,7 +1,7 @@
 package com.example.studentinfo;
 
 public class Student {
-    private int id;
+    private String id;
     private String name;
     private String dept_name;
     private int tot_cred;
@@ -16,11 +16,11 @@ public class Student {
                 '}';
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -48,7 +48,7 @@ public class Student {
         this.tot_cred = tot_cred;
     }
 
-    public Student(int id, String name, String dept_name, int tot_cred) {
+    public Student(String id, String name, String dept_name, int tot_cred) {
         this.id = id;
         this.name = name;
         this.dept_name = dept_name;
