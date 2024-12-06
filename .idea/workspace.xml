@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1172e970-41d0-4e3c-a8ff-eae8ef2c6e76" name="Changes" comment="commit to pull">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9db0b8dc-71e0-4866-8256-f1e25f195d9b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9db0b8dc-71e0-4866-8256-f1e25f195d9b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/9db0b8dc-71e0-4866-8256-f1e25f195d9b/storage_v2/_src_/database/university.jupICw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/9db0b8dc-71e0-4866-8256-f1e25f195d9b/storage_v2/_src_/database/university.jupICw/schema/public.abK9xQ.meta" afterDir="false" />
+    <list default="true" id="1172e970-41d0-4e3c-a8ff-eae8ef2c6e76" name="Changes" comment="fixing final errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/CourseData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/CourseData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/StudentData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/StudentData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/TakesData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/studentinfo/TakesData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,8 +92,18 @@
       <workItem from="1733341239351" duration="858000" />
       <workItem from="1733380943061" duration="185000" />
       <workItem from="1733382227941" duration="293000" />
-      <workItem from="1733411494181" duration="5730000" />
+      <workItem from="1733411494181" duration="6085000" />
+      <workItem from="1733453148598" duration="1618000" />
     </task>
+    <task id="LOCAL-00001" summary="fixing final errors">
+      <option name="closed" value="true" />
+      <created>1733422896662</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733422896662</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +111,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit to pull" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit to pull" />
+    <MESSAGE value="fixing final errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixing final errors" />
   </component>
 </project>
