@@ -30,3 +30,28 @@ Ensure that data entered by users is valid and handle errors or exceptions grace
 Roles of our members:
 Mairam:Responsible for creating the user interface using JavaFX and SceneBuilder.
 Cholpon and Erkeaiym:Work together to develop the application's core functionality and connect it to the database.
+
+UML diagram:
+https://drive.google.com/file/d/1RjLC13uBDJzNWFz01fMDMgh46BKlqpQ0/view?usp=sharing
+
+Results:
+Student:
+<img width="796" alt="Снимок экрана 2024-12-06 в 08 52 37" src=<img width="796" alt="Снимок экрана 2024-12-06 в 09 03 39" src="https://github.com/user-attachments/assets/45954644-1e3c-458a-bd72-9d944bda98c7">
+<img width="799" alt="Снимок экрана 2024-12-06 в 09 03 52" src="https://github.com/user-attachments/assets/652fd679-bf37-4251-a723-3daf3e5ab79b">
+"https://github.com/user-attachments/assets/ff5a7918-aec7-4896-a6b9-e921c40d25b8">
+
+Course:
+<img width="810" alt="Снимок экрана 2024-12-03 в 12 21 56" src="https://github.com/user-attachments/assets/4e8ffdaa-d4e0-42ec-9d6e-2eb11e9f5a59">
+
+<img width="795" alt="Снимок экрана 2024-12-06 в 08 53 05" src="https://github.com/user-attachments/assets/6ad564dc-821b-48d9-bd47-0888c3aa29b6">
+
+<img width="802" alt="Снимок экрана 2024-12-06 в 08 53 15" src="https://github.com/user-attachments/assets/daec9b2c-ac4f-406b-809d-ea7d6c23a438">
+
+Takes:<img width="799" alt="Снимок экрана 2024-12-06 в 08 55 11" src="https://github.com/user-attachments/assets/c5592227-e376-4ece-8d79-de4a6e692b84">
+
+<img width="795" alt="Снимок экрана 2024-12-06 в 08 54 59" src="https://github.com/user-attachments/assets/27c2e66d-9687-4722-9933-de452fdd489d">
+
+
+Documentation of meetings:
+https://www.notion.so/Weekly-Meeting-Documentation-15179672cdc18014ab30e53bfb28741c?pvs=4
+
