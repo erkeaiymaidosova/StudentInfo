@@ -52,6 +52,5 @@ Takes:<img width="799" alt="Снимок экрана 2024-12-06 в 08 55 11" sr
 <img width="795" alt="Снимок экрана 2024-12-06 в 08 54 59" src="https://github.com/user-attachments/assets/27c2e66d-9687-4722-9933-de452fdd489d">
 
 
-## Documentation of meetings:
-https://www.notion.so/Weekly-Meeting-Documentation-15179672cdc18014ab30e53bfb28741c?pvs=4
-
+## Documentation of meetings:[
+(https://1drv.ms/w/c/53c08c3500d59f2f/EeAQrtKxajVNh16tzpNCpCMB9for54T2xfx7oS1vEOZceQ?e=r5GEUS)](https://1drv.ms/w/c/53c08c3500d59f2f/EeAQrtKxajVNh16tzpNCpCMB9for54T2xfx7oS1vEOZceQ?e=r5GEUS)
