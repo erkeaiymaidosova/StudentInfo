@@ -28,7 +28,7 @@ It uses a database to store data and follows a clear structure, ensuring efficie
 - Ensure that data entered by users is valid and handle errors or exceptions gracefully, providing informative messages when necessary.
 
 ## Roles of our members:
-- Mairam:Responsible for creating the user interface using JavaFX and SceneBuilder with presentation ans documantation
+-Aktan:Responsible for creating the user interface using JavaFX and SceneBuilder with presentation ans documantation
 - Cholpon and Erkeaiym:Work together to develop the application's core functionality and connect it to the database.
 
 ## UML diagram:
