@@ -53,4 +53,4 @@ Takes:<img width="799" alt="Снимок экрана 2024-12-06 в 08 55 11" sr
 
 
 ## Documentation of meetings:[
-(https://1drv.ms/w/c/53c08c3500d59f2f/EeAQrtKxajVNh16tzpNCpCMB9for54T2xfx7oS1vEOZceQ?e=r5GEUS)](https://1drv.ms/w/c/53c08c3500d59f2f/EeAQrtKxajVNh16tzpNCpCMB9for54T2xfx7oS1vEOZceQ?e=r5GEUS)
+(https://www.notion.so/Documentation-for-Student-Information-System-15c03eed285480119b9afc8c4f7497fc?pvs=4)
